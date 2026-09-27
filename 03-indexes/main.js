@@ -40,9 +40,24 @@ async function main() {
 //     ]);
     // let produc = await db.collection("products").find().toArray();
     // console.log(produc.length);
-    
 
+    // view execution stats before index
+      // let findings = await db.collection("products").find({category: "Laptop"}).explain("executionStats")
+     
+    // add indexing
+      // await db.collection("products").createIndex({
+      //   category: 1
+      // }) 
+
+    // get indexes
+    // let index = await db.collection("products").indexes()
+
+    // view execution stats after indexing  
+     let findings = await db.collection("products").find({category: "Laptop"}).explain("executionStats")
+
+    console.log(`indexes: ${JSON.stringify(index)} \n\n stats: ${JSON.stringify(findings, null, 2)}`)
   } finally {
+   
     await client.close();
   }
 }
